@@ -8,9 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.adx2099.bakingapp.MainActivity;
 
-public class SplashActivity  extends AppCompatActivity implements SplashView  {
+public class SplashActivity  extends AppCompatActivity {
     private final int DURATION_SPLASH = 2500;
-    private SplashPresenter splashPresenter;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
