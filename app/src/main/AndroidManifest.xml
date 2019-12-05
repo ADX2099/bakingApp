@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.adx2099.bakingapp">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -21,8 +22,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity"
+            android:launchMode="singleTop"
             android:windowSoftInputMode="adjustPan|adjustResize">
         </activity>
-    </application>
+        <provider
+            android:name="com.adx2099.bakingapp.provider.BakingContentProvider"
+            android:authorities="com.adx2099.bakingapp"
+            android:exported="false"/>
 
+    </application>
 </manifest>

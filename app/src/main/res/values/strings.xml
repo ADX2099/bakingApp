@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Baking App</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="imageview_place_holder">This is a placeholder for ImageViews.</string>
+    <string name="serving_text_place_holder">%1$d servings</string>
+    <string name="recipe_not_found">Could not find Recipe</string>
 </resources>

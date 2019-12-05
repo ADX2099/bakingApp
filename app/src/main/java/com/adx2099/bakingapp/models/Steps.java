@@ -1,0 +1,64 @@
+package com.adx2099.bakingapp.models;
+
+import android.databinding.BaseObservable;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+public class Steps extends BaseObservable implements Parcelable {
+    @Expose
+    @SerializedName("id")
+    private byte stepId;
+    @Expose
+    @SerializedName("shortDescription")
+    public String shortDescription;
+    @Expose
+    @SerializedName("description")
+    public String description;
+    @Expose
+    @SerializedName("videoURL")
+    public String videoURL;
+    @Expose
+    @SerializedName("thumbnailURL")
+    public String thumbnailURL;
+
+    public Steps(){
+
+    }
+
+    protected Steps(Parcel in) {
+        stepId = in.readByte();
+        shortDescription = in.readString();
+        description = in.readString();
+        videoURL = in.readString();
+        thumbnailURL = in.readString();
+    }
+
+    public static final Creator<Steps> CREATOR = new Creator<Steps>() {
+        @Override
+        public Steps createFromParcel(Parcel in) {
+            return new Steps(in);
+        }
+
+        @Override
+        public Steps[] newArray(int size) {
+            return new Steps[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeByte(stepId);
+        dest.writeString(shortDescription);
+        dest.writeString(description);
+        dest.writeString(videoURL);
+        dest.writeString(thumbnailURL);
+    }
+}

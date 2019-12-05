@@ -18,6 +18,10 @@ android {
 
     }
 
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
+
     dataBinding{
         enabled true
     }
@@ -39,14 +43,25 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:16.0.4'
     implementation 'com.google.firebase:firebase-messaging:17.3.4'
 
-    implementation "com.squareup.retrofit2:adapter-rxjava:$rootProject.ext.retrofit2AdapterRxjava"
     implementation "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofit"
     implementation "com.squareup.retrofit2:converter-gson:$rootProject.ext.retrofit"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.ext.retrofit"
+    implementation "com.squareup.retrofit2:adapter-rxjava:$rootProject.ext.retrofit2AdapterRxjava"
+    implementation "com.squareup.retrofit2:converter-scalars:$rootProject.ext.retrofitScalar"
+    implementation 'io.reactivex:rxandroid:1.2.1'
+    implementation 'jp.wasabeef:blurry:2.1.1'
+
     implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.ext.okhttp"
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$rootProject.ext.leakCanaryVersion"
 
     implementation "com.facebook.stetho:stetho:$rootProject.ext.stethoVersion"
     implementation "com.facebook.stetho:stetho-okhttp3:$rootProject.ext.stethoVersion"
+
+    implementation "com.github.bumptech.glide:glide:$rootProject.ext.glideLibraryVersion"
+    annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.ext.glideLibraryVersion"
+    implementation("com.github.bumptech.glide:okhttp3-integration:$rootProject.ext.glideLibraryVersion") {
+        exclude group: 'glide-parent'
+    }
 
 
 
