@@ -18,6 +18,7 @@ public class BakingConstants {
     public static final String THUMBNAIL_KEY = "thumbnailURL";
     public static final String VIDEO_KEY = "videoURL";
     public static final String RECIPE_DATA_KEY = "recppeData";
+    public static final String STEP_ID_KEY = "stepID";
 
 
     //--------------------------------------------------------------------------------------------

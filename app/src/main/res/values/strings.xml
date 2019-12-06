@@ -6,4 +6,9 @@
     <string name="imageview_place_holder">This is a placeholder for ImageViews.</string>
     <string name="serving_text_place_holder">%1$d servings</string>
     <string name="recipe_not_found">Could not find Recipe</string>
+    <string name="title_ingredients">Ingredients</string>
+    <string name="title_qty">Quantity</string>
+    <string name="title_measure">Measure</string>
+    <string name="title_step">Step:</string>
+
 </resources>

@@ -10,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
 public class Steps extends BaseObservable implements Parcelable {
     @Expose
     @SerializedName("id")
-    private byte stepId;
+    public byte stepId;
     @Expose
     @SerializedName("shortDescription")
     public String shortDescription;
@@ -24,6 +24,13 @@ public class Steps extends BaseObservable implements Parcelable {
     @SerializedName("thumbnailURL")
     public String thumbnailURL;
 
+    @Expose
+    @SerializedName("step")
+    public String stepNumber;
+
+
+
+
     public Steps(){
 
     }
@@ -34,6 +41,8 @@ public class Steps extends BaseObservable implements Parcelable {
         description = in.readString();
         videoURL = in.readString();
         thumbnailURL = in.readString();
+        stepNumber = in.readString();
+
     }
 
     public static final Creator<Steps> CREATOR = new Creator<Steps>() {
@@ -60,5 +69,7 @@ public class Steps extends BaseObservable implements Parcelable {
         dest.writeString(description);
         dest.writeString(videoURL);
         dest.writeString(thumbnailURL);
+        dest.writeString(stepNumber);
+
     }
 }
