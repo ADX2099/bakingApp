@@ -44,9 +44,6 @@ public class RecipeRecycleAdapter extends RecyclerView.Adapter<RecipeRecycleAdap
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
         RecipeResponse recipeResponse = recipeResponseList.get(position);
-        String name = recipeResponseList.get(position).getName();
-
-        Log.d("ADX2099", "My name:" + name);
         viewHolder.mRecipeRowBinding.setIRecipeItemClickListener(iRecipeItemClickListener);
         viewHolder.mRecipeRowBinding.setRecipe(recipeResponse);
         viewHolder.mRecipeRowBinding.executePendingBindings();

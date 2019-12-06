@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- <layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -7,13 +7,13 @@
         <variable
             name="ingredients"
             type="com.adx2099.bakingapp.models.Ingredient" />
-    </data>-->
+        <variable
+            name="IngredientItemClickListener"
+            type="com.adx2099.bakingapp.callback.IngredientItemClickListener" />
+    </data>
 
     <android.support.constraint.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
+                android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/ingredients_touch_selector">
 
@@ -27,12 +27,12 @@
             tools:layout_editor_absoluteY="0dp" />
 
         <TextView
-            android:id="@+id/date"
+            android:id="@+id/ingredient"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:fontFamily="sans-serif"
-            android:text="ingredients.ingredient"
+            android:text="@{ingredients.ingredient}"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textColor="@color/primary_light"
             android:textSize="20sp"
@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:fontFamily="sans-serif"
-            android:text="@string/title_qty"
+            android:text="@{ingredients.quantity}"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/primary_light"
             android:textSize="15sp"
@@ -74,7 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:fontFamily="sans-serif-light"
-            android:text="ingredients.quantity"
+            android:text="@{ingredients.quantity}"
             android:textColor="@color/accent"
             android:textSize="48sp"
             app:layout_constraintBottom_toBottomOf="@+id/ingredients_icon"
@@ -106,7 +106,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:fontFamily="sans-serif-light"
-            android:text="@{ingredients.quantity}"
+            android:text="@{ingredients.measure}"
             android:textColor="@color/accent"
             android:textSize="48sp"
             app:layout_constraintBottom_toBottomOf="@+id/measure"
@@ -118,4 +118,4 @@
 
 
     </android.support.constraint.ConstraintLayout>
-<!-- </layout> -->
+ </layout>

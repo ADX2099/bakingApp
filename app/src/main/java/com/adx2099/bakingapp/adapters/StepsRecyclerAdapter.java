@@ -30,10 +30,6 @@ public class StepsRecyclerAdapter extends RecyclerView.Adapter<StepsRecyclerAdap
 
 
 
-    public interface OnItemClick {
-         void onItemClick(View view, int position);
-    }
-
 
 
     public StepsRecyclerAdapter(Context context, List<Steps> stepsList, IStepItemClickListener iStepItemClickListener, IngredientItemClickListener ingredientItemClickListener) {
@@ -101,6 +97,7 @@ public class StepsRecyclerAdapter extends RecyclerView.Adapter<StepsRecyclerAdap
 
     @Override
     public int getItemCount() {
+
         return stepsList.size();
     }
 
@@ -127,8 +124,6 @@ public class StepsRecyclerAdapter extends RecyclerView.Adapter<StepsRecyclerAdap
             super(itemView.getRoot());
             ingredientsTitleRowBinding = itemView;
         }
-
-
     }
 
 

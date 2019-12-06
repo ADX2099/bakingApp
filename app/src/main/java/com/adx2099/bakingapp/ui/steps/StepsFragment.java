@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,12 +21,17 @@ import com.adx2099.bakingapp.adapters.StepsRecyclerAdapter;
 import com.adx2099.bakingapp.callback.IStepItemClickListener;
 import com.adx2099.bakingapp.callback.IngredientItemClickListener;
 import com.adx2099.bakingapp.databinding.FragmentStepsBinding;
+import com.adx2099.bakingapp.helper.BakingConstants;
 import com.adx2099.bakingapp.models.RecipeResponse;
 import com.adx2099.bakingapp.models.Steps;
+import com.adx2099.bakingapp.ui.ingredients.IngredientsFragment;
+import com.adx2099.bakingapp.ui.recipe.RecipeFragment;
 
 import java.util.List;
 
+import static com.adx2099.bakingapp.helper.BakingConstants.INGR_FRAG;
 import static com.adx2099.bakingapp.helper.BakingConstants.LAYOUT;
+import static com.adx2099.bakingapp.helper.BakingConstants.MAIN_FRAG;
 import static com.adx2099.bakingapp.helper.BakingConstants.RECIPE_DATA_KEY;
 
 /**
@@ -84,6 +90,19 @@ public class StepsFragment extends Fragment implements StepsView, IStepItemClick
 
     @Override
     public void onIngredientTitleClick() {
-        Log.d("ADX2099", "Click ene ");
+        initFragmentIngredients();
     }
+
+    private void initFragmentIngredients() {
+        IngredientsFragment ingredientsFragment = new IngredientsFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt(LAYOUT, lay);
+        bundle.putParcelable(RECIPE_DATA_KEY, recipeResponse);
+        ingredientsFragment.setArguments(bundle);
+        getFragmentManager().beginTransaction()
+                .replace(lay, ingredientsFragment,INGR_FRAG)
+                .addToBackStack(null)
+                .commit();
+    }
+
 }

@@ -21,11 +21,13 @@ public class BakingConstants {
     public static final String STEP_ID_KEY = "stepID";
 
 
+
     //--------------------------------------------------------------------------------------------
     //FRAGMENTS TAGS
     public static  final String MAIN_FRAG = "main-fragment";
     public static  final String RECIPE_FRAG = "recipe-fragment";
     public static  final String STEP_FRAG = "steps-fragment";
+    public static  final String INGR_FRAG = "ingredients-fragment";
     //--------------------------------------------------------------------------------------------
     //REMOTE PARAMS
     public static final String BASE_URL = "https://d17h27t6h515a5.cloudfront.net/";
