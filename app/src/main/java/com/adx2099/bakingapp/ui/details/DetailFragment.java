@@ -128,7 +128,8 @@ public class DetailFragment extends Fragment implements View.OnClickListener, Ex
                 videoUrl = savedInstanceState.getString(STATE_VIDEO_CALLBACK);
                 int orientation = getResources().getConfiguration().orientation;
                 if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                    //initializeFullScreenPlayer();
+                    initializePlayer();
+                    openFullscreenDialog(mExoPlayerView);
                 } else {
                     initializePlayer();
                 }
@@ -257,9 +258,9 @@ public class DetailFragment extends Fragment implements View.OnClickListener, Ex
 
         Dialog myFullScreenDialog = initFullscreenDialog();
 
-        ((ViewGroup) fragmentDetailBinding.playerView.getParent()).removeView(mExoPlayerView);
+        ((ViewGroup) fragmentDetailBinding.playerView.getParent()).removeView(myExoPlayerView);
 
-        mFullScreenDialog.addContentView(myExoPlayerView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        myFullScreenDialog.addContentView(myExoPlayerView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         fullScreenIcon =  myExoPlayerView.findViewById(R.id.exo_fullscreen_icon);
         fullScreenIcon.setBackgroundResource(R.drawable.ic_fullscreen_skrink);
         mExoPlayerFullscreen = true;
