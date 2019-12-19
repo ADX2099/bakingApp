@@ -3,6 +3,7 @@ package com.adx2099.bakingapp.ui.steps;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -24,20 +25,25 @@ import com.adx2099.bakingapp.databinding.FragmentStepsBinding;
 import com.adx2099.bakingapp.helper.BakingConstants;
 import com.adx2099.bakingapp.models.RecipeResponse;
 import com.adx2099.bakingapp.models.Steps;
+import com.adx2099.bakingapp.ui.details.DetailFragment;
 import com.adx2099.bakingapp.ui.ingredients.IngredientsFragment;
 import com.adx2099.bakingapp.ui.recipe.RecipeFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import static com.adx2099.bakingapp.helper.BakingConstants.DETAIL_FRAG;
 import static com.adx2099.bakingapp.helper.BakingConstants.INGR_FRAG;
 import static com.adx2099.bakingapp.helper.BakingConstants.LAYOUT;
+import static com.adx2099.bakingapp.helper.BakingConstants.LIST_STEP_KEY;
 import static com.adx2099.bakingapp.helper.BakingConstants.MAIN_FRAG;
 import static com.adx2099.bakingapp.helper.BakingConstants.RECIPE_DATA_KEY;
+import static com.adx2099.bakingapp.helper.BakingConstants.STEP_KEY;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class StepsFragment extends Fragment implements StepsView, IStepItemClickListener, IngredientItemClickListener {
+public class StepsFragment extends Fragment implements StepsView, IStepItemClickListener, IngredientItemClickListener, View.OnClickListener {
     private int lay;
     private RecipeResponse recipeResponse;
     private FragmentStepsBinding fragmentStepsBinding;
@@ -58,6 +64,9 @@ public class StepsFragment extends Fragment implements StepsView, IStepItemClick
         recipeResponse = bundle.getParcelable(RECIPE_DATA_KEY);
         if(recipeResponse != null){
             mList = recipeResponse.getSteps();
+            String size = String.valueOf(mList.size());
+            String id = String.valueOf(mList.get(0).stepId);
+            Log.d("ADX2099", "Step Values::" + size + " id: " + id);
         }
     }
 
@@ -68,6 +77,7 @@ public class StepsFragment extends Fragment implements StepsView, IStepItemClick
         fragmentStepsBinding.rvSteps.setLayoutManager(new LinearLayoutManager(getActivity()));
         fragmentStepsBinding.rvSteps.setHasFixedSize(true);
         fragmentStepsBinding.rvSteps.setAdapter(adapter);
+        fragmentStepsBinding.titleIngredients.setOnClickListener(this);
 
         View view = fragmentStepsBinding.getRoot();
         return view;
@@ -83,9 +93,24 @@ public class StepsFragment extends Fragment implements StepsView, IStepItemClick
     }
 
     @Override
-    public void onStepItemClick() {
+    public void onStepItemClick(Steps step) {
 
-        Log.d("ADX2099", "Click");
+        Log.d("ADX2099", "Clkick" + step.videoURL);
+        initDetailFragment(step);
+    }
+
+    private void initDetailFragment(Steps step) {
+
+        DetailFragment detailFragment = new DetailFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt(LAYOUT, lay);
+        bundle.putParcelable(STEP_KEY, step);
+        bundle.putParcelableArrayList(LIST_STEP_KEY, (ArrayList<? extends Parcelable>) mList);
+        detailFragment.setArguments(bundle);
+        getFragmentManager().beginTransaction()
+                .replace(lay, detailFragment,DETAIL_FRAG)
+                .addToBackStack(null)
+                .commit();
     }
 
     @Override
@@ -93,7 +118,7 @@ public class StepsFragment extends Fragment implements StepsView, IStepItemClick
         initFragmentIngredients();
     }
 
-    private void initFragmentIngredients() {
+    public void initFragmentIngredients() {
         IngredientsFragment ingredientsFragment = new IngredientsFragment();
         Bundle bundle = new Bundle();
         bundle.putInt(LAYOUT, lay);
@@ -105,4 +130,12 @@ public class StepsFragment extends Fragment implements StepsView, IStepItemClick
                 .commit();
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.titleIngredients:
+                 initFragmentIngredients();
+                break;
+        }
+    }
 }

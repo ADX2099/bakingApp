@@ -49,6 +49,7 @@ public class BakingDbHelper extends SQLiteOpenHelper {
 
     public Uri insertToBaking(RecipeResponse recipeResponse){
         Gson gson = new Gson();
+
         ContentValues values = new ContentValues();
         values.put(BakingEntry._ID, recipeResponse.getRecipeId());
         values.put(BakingEntry.COLUMN_INGREDIENTS, gson.toJson(recipeResponse.getIngredients()));

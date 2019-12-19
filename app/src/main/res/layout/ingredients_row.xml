@@ -7,13 +7,11 @@
         <variable
             name="ingredients"
             type="com.adx2099.bakingapp.models.Ingredient" />
-        <variable
-            name="IngredientItemClickListener"
-            type="com.adx2099.bakingapp.callback.IngredientItemClickListener" />
+
     </data>
 
     <android.support.constraint.ConstraintLayout
-                android:layout_width="match_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/ingredients_touch_selector">
 
@@ -50,7 +48,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/horizontal_middle"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_ingredients" />
+            android:src="@drawable/ic_ingredients" />
 
         <TextView
             android:id="@+id/quantity"
@@ -58,7 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:fontFamily="sans-serif"
-            android:text="@{ingredients.quantity}"
+            android:text="@string/title_qty"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/primary_light"
             android:textSize="15sp"
@@ -74,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:fontFamily="sans-serif-light"
-            android:text="@{ingredients.quantity}"
+            android:text="@{String.valueOf(ingredients.quantity)}"
             android:textColor="@color/accent"
             android:textSize="48sp"
             app:layout_constraintBottom_toBottomOf="@+id/ingredients_icon"

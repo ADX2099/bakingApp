@@ -8,4 +8,6 @@
     <color name="secondary_text">#757575</color>
     <color name="icons">#212121</color>
     <color name="divider">#BDBDBD</color>
+    <color name="exoPlayerTimeBarColor">#2196F3</color>
+    <color name="connectionIssueIconColor">#D2D5DA</color>
 </resources>

@@ -19,6 +19,8 @@ public class Ingredient extends BaseObservable implements Parcelable {
     public String ingredient;
 
 
+
+
     public Ingredient() {
     }
 
@@ -26,6 +28,7 @@ public class Ingredient extends BaseObservable implements Parcelable {
         quantity = in.readFloat();
         measure = in.readString();
         ingredient = in.readString();
+
     }
 
     public static final Creator<Ingredient> CREATOR = new Creator<Ingredient>() {
@@ -50,5 +53,6 @@ public class Ingredient extends BaseObservable implements Parcelable {
         dest.writeFloat(quantity);
         dest.writeString(measure);
         dest.writeString(ingredient);
+
     }
 }

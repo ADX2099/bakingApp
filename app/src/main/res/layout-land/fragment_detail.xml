@@ -18,7 +18,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginLeft="0dp"
-            android:layout_marginTop="0dp"
+            android:layout_marginTop="70dp"
             android:layout_marginRight="0dp"
             android:layout_marginBottom="0dp"
             app:layout_constraintBottom_toTopOf="@+id/horizontalHalf"
@@ -41,9 +41,9 @@
             android:id="@+id/cardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="192dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             app:layout_constraintBottom_toTopOf="@+id/stepNavigation"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -53,12 +53,11 @@
                 android:id="@+id/stepInstruction"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingStart="5dp"
+                android:paddingTop="5dp"
                 android:text="@string/title_ingredients"
                 android:textColor="@color/primary_dark"
-                tools:text="@string/title_ingredients"
-                android:paddingStart="5dp"
-                android:paddingTop="5dp"/>
-
+                tools:text="@string/title_ingredients" />
         </android.support.v7.widget.CardView>
 
         <android.support.constraint.ConstraintLayout

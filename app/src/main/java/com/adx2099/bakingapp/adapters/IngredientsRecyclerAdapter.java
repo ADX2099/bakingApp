@@ -41,7 +41,8 @@ public class IngredientsRecyclerAdapter extends RecyclerView.Adapter<Ingredients
     public void onBindViewHolder(@NonNull IngredientsRecyclerAdapter.ViewHolder viewHolder, int position) {
         Ingredient ingredient = ingredientList.get(position);
         viewHolder.ingredientsRowBinding.setIngredients(ingredient);
-        viewHolder.ingredientsRowBinding.setIngredientItemClickListener(ingredientItemClickListener);
+
+//        viewHolder.ingredientsRowBinding.setIngredientItemClickListener(ingredientItemClickListener);
         viewHolder.ingredientsRowBinding.executePendingBindings();
     }
 

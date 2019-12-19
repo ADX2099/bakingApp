@@ -37,6 +37,19 @@ public class DataUtils {
         return listIngredients;
     }
 
+    private static String formatQuantity(float quantity) {
+        Log.d("ADX2099", "The value: " + String.valueOf(quantity));
+        if (quantity == 0.0) {
+            return "1/2";
+        } else {
+            int round = Math.round(quantity);
+            return String.valueOf(round);
+        }
+
+
+
+    }
+
     public static List<Steps> parseSteps(String steps){
         List<Steps> listSteps = new ArrayList<>();
         try {
@@ -48,6 +61,7 @@ public class DataUtils {
                 stepsObj.shortDescription = stepsJSON.getString(BakingConstants.SHORT_DESC_KEY);
                 stepsObj.thumbnailURL = stepsJSON.getString(BakingConstants.THUMBNAIL_KEY);
                 stepsObj.videoURL = stepsJSON.getString(BakingConstants.VIDEO_KEY);
+                stepsObj.stepId = stepsJSON.getInt(BakingConstants.STEPS_ID);
                 listSteps.add(stepsObj);
             }
         } catch (JSONException e) {

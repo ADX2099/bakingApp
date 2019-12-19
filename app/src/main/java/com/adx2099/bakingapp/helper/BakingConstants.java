@@ -10,6 +10,7 @@ public class BakingConstants {
 
     //--------------------------------------------------------------------------------------------
     //KEYS
+    public static final String STEPS_ID = "id";
     public static final String INGREDIENT_KEY  = "ingredient";
     public static final String MEASURE_KEY =   "measure";
     public static final String QUANTITY_KEY =  "quantity";
@@ -18,7 +19,9 @@ public class BakingConstants {
     public static final String THUMBNAIL_KEY = "thumbnailURL";
     public static final String VIDEO_KEY = "videoURL";
     public static final String RECIPE_DATA_KEY = "recppeData";
-    public static final String STEP_ID_KEY = "stepID";
+    public static final String STEP_KEY = "step";
+    public static final String LIST_STEP_KEY = "stepList";
+
 
 
 
@@ -28,6 +31,7 @@ public class BakingConstants {
     public static  final String RECIPE_FRAG = "recipe-fragment";
     public static  final String STEP_FRAG = "steps-fragment";
     public static  final String INGR_FRAG = "ingredients-fragment";
+    public static  final String DETAIL_FRAG = "detail-fragment";
     //--------------------------------------------------------------------------------------------
     //REMOTE PARAMS
     public static final String BASE_URL = "https://d17h27t6h515a5.cloudfront.net/";

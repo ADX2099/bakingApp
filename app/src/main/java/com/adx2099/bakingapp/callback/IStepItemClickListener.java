@@ -7,5 +7,5 @@ import com.adx2099.bakingapp.models.Steps;
 import java.util.List;
 
 public interface IStepItemClickListener {
-    void onStepItemClick();
+    void onStepItemClick(Steps step);
 }

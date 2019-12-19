@@ -10,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
 public class Steps extends BaseObservable implements Parcelable {
     @Expose
     @SerializedName("id")
-    public byte stepId;
+    public int stepId;
     @Expose
     @SerializedName("shortDescription")
     public String shortDescription;
@@ -36,7 +36,7 @@ public class Steps extends BaseObservable implements Parcelable {
     }
 
     protected Steps(Parcel in) {
-        stepId = in.readByte();
+        stepId = in.readInt();
         shortDescription = in.readString();
         description = in.readString();
         videoURL = in.readString();
@@ -64,7 +64,7 @@ public class Steps extends BaseObservable implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeByte(stepId);
+        dest.writeInt(stepId);
         dest.writeString(shortDescription);
         dest.writeString(description);
         dest.writeString(videoURL);

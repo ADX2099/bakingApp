@@ -66,25 +66,11 @@ public class StepsRecyclerAdapter extends RecyclerView.Adapter<StepsRecyclerAdap
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
-        int viewType = getItemViewType(position);
-
-        switch (viewType) {
-            case VIEW_TYPE_INGREDIENTS:
-                viewHolder.ingredientsTitleRowBinding.setIngredientItemClickListener(ingredientItemClickListener);
-                viewHolder.ingredientsTitleRowBinding.executePendingBindings();
-                break;
-            case VIEW_TYPE_STEP:
-                Steps step = stepsList.get(position);
-                step.stepNumber = String.valueOf(position);
-                viewHolder.stepRowBinding.setStep(step);
-                viewHolder.stepRowBinding.executePendingBindings();
-                viewHolder.stepRowBinding.setIStepItemClickListener(iStepItemClickListener);
-
-                break;
-        }
-
-
-
+        Steps step = stepsList.get(position);
+        step.stepNumber = String.valueOf(position + 1);
+        viewHolder.stepRowBinding.setStep(step);
+        viewHolder.stepRowBinding.executePendingBindings();
+        viewHolder.stepRowBinding.setIStepItemClickListener(iStepItemClickListener);
 
     }
 
@@ -103,11 +89,8 @@ public class StepsRecyclerAdapter extends RecyclerView.Adapter<StepsRecyclerAdap
 
     @Override
     public int getItemViewType(int position) {
-        if(position == 0){
-            return VIEW_TYPE_INGREDIENTS;
-        }else{
             return VIEW_TYPE_STEP;
-        }
+
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder   {
