@@ -257,7 +257,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener, Ex
     private void openFullscreenDialog(SimpleExoPlayerView myExoPlayerView){
 
         Dialog myFullScreenDialog = initFullscreenDialog();
-
+        mFullScreenDialog = myFullScreenDialog;
         ((ViewGroup) fragmentDetailBinding.playerView.getParent()).removeView(myExoPlayerView);
 
         myFullScreenDialog.addContentView(myExoPlayerView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
@@ -283,18 +283,14 @@ public class DetailFragment extends Fragment implements View.OnClickListener, Ex
 
     private void closeFullscreenDialog() {
 
-        /*((ViewGroup) mExoPlayerView.getParent()).removeView(mExoPlayerView);
-        ((FrameLayout) findViewById(R.id.main_media_frame)).addView(mExoPlayerView);
+        ((ViewGroup) mExoPlayerView.getParent()).removeView(mExoPlayerView);
+        ((FrameLayout) fragmentDetailBinding.mainMediaFrame).addView(mExoPlayerView);
+
         mExoPlayerFullscreen = false;
         mFullScreenDialog.dismiss();
-        mFullScreenIcon.setImageDrawable(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_fullscreen_expand));*/
+        fullScreenIcon.setBackgroundResource(R.drawable.ic_fullscreen_expand);
 
     }
-
-
-
-
-
 
     private void initializePlayer() {
 
