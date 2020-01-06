@@ -116,8 +116,9 @@ public class DetailFragment extends Fragment implements View.OnClickListener, Ex
 
     }
 
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         fragmentDetailBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail, container, false);
         fragmentDetailBinding.prev.setOnClickListener(this);
         fragmentDetailBinding.next.setOnClickListener(this);
@@ -133,19 +134,14 @@ public class DetailFragment extends Fragment implements View.OnClickListener, Ex
                 } else {
                     initializePlayer();
                 }
-
             }
         }else{
             setUpViews();
             initializePlayer();
-            initFullscreenButton(mExoPlayerView);
         }
-
 
         return fragmentDetailBinding.getRoot();
     }
-
-
 
     private void setUpViews() {
         if(NAVIGATION_PATH){
@@ -295,6 +291,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener, Ex
     private void initializePlayer() {
 
         if (mExoPlayer == null) {
+
             TrackSelector trackSelector = new DefaultTrackSelector();
             TrackSelection.Factory adaptiveTrackSelectionFactory = new AdaptiveTrackSelection.Factory(BANDWIDTH_METER);
             trackSelector = new DefaultTrackSelector(adaptiveTrackSelectionFactory);
@@ -377,7 +374,6 @@ public class DetailFragment extends Fragment implements View.OnClickListener, Ex
     @Override
     public void onResume() {
         super.onResume();
-
 
     }
 
