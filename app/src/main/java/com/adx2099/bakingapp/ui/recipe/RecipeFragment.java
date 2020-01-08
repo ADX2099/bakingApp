@@ -2,6 +2,7 @@ package com.adx2099.bakingapp.ui.recipe;
 
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -45,9 +47,11 @@ import static com.adx2099.bakingapp.helper.BakingConstants.STEP_FRAG;
 
 public class RecipeFragment extends Fragment implements RecipeView, IRecipeItemClickListener, LoaderManager.LoaderCallbacks<Cursor> {
     private FragmentRecipeBinding fragmentRecipeBinding;
-    private  List<RecipeResponse> mRecipeResponses = new ArrayList<>();
+    private  ArrayList<RecipeResponse> mRecipeResponses = new ArrayList<>();
     private RecipeRecycleAdapter adapter;
+    private Parcelable savedRecyclerLayoutState;
     public static final String DATA_RECIPES = "recipes_key";
+    public static final String BUNDLE_RECYCLER_LAYOUT = "bundle_recycler_layout";
     private static final int BAKING_LOADER_ID = 0;
     private int lay;
 
@@ -102,17 +106,30 @@ public class RecipeFragment extends Fragment implements RecipeView, IRecipeItemC
         Log.d("ADX2098", "onCreateView");
         fragmentRecipeBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_recipe, container, false);
         if(savedInstanceState != null){
-            loadRecipesAdapter();
+           mRecipeResponses = savedInstanceState.getParcelableArrayList(DATA_RECIPES);
+           savedRecyclerLayoutState = savedInstanceState.getParcelable(BUNDLE_RECYCLER_LAYOUT);
+            displayData();
         }else{
-            fragmentRecipeBinding.rvRecipes.setLayoutManager(new LinearLayoutManager(getActivity()));
-            fragmentRecipeBinding.rvRecipes.setHasFixedSize(true);
-            fragmentRecipeBinding.rvRecipes.setAdapter(loadRecipesAdapter());
+            loadRecipesAdapter();
+            displayData();
+
         }
         View view = fragmentRecipeBinding.getRoot();
         return view;
     }
 
-    private RecipeRecycleAdapter loadRecipesAdapter() {
+    private void displayData(){
+        fragmentRecipeBinding.rvRecipes.setLayoutManager(new LinearLayoutManager(getActivity()));
+        fragmentRecipeBinding.rvRecipes.setHasFixedSize(true);
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE){
+            fragmentRecipeBinding.rvRecipes.setLayoutManager(new GridLayoutManager(App.getCurrentActivity(), 2));
+        }
+        adapter = new RecipeRecycleAdapter(App.getCurrentActivity(),mRecipeResponses,this);
+        fragmentRecipeBinding.rvRecipes.setAdapter(adapter);
+    }
+
+    private void loadRecipesAdapter() {
         LoaderManager loaderManager = App.getCurrentActivity().getSupportLoaderManager();
         Loader<Cursor> cursorLoader = loaderManager.getLoader(BAKING_LOADER_ID);
         if(cursorLoader == null){
@@ -120,8 +137,7 @@ public class RecipeFragment extends Fragment implements RecipeView, IRecipeItemC
         }else{
             loaderManager.restartLoader(BAKING_LOADER_ID,null,this);
         }
-        adapter = new RecipeRecycleAdapter(App.getCurrentActivity(),mRecipeResponses,this);
-        return adapter;
+
     }
 
 
@@ -212,19 +228,20 @@ public class RecipeFragment extends Fragment implements RecipeView, IRecipeItemC
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle currentState) {
-        if(currentState != null){
-            currentState.putParcelableArrayList(DATA_RECIPES, new ArrayList<Parcelable>());
-        }
         super.onSaveInstanceState(currentState);
-        Log.d("ADX2098", "OnSaveInstanceState");
-
-
+        currentState.putParcelableArrayList(DATA_RECIPES, mRecipeResponses);
+        currentState.putParcelable(BUNDLE_RECYCLER_LAYOUT, fragmentRecipeBinding.rvRecipes.getLayoutManager().onSaveInstanceState());
     }
+
 
     @Override
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        if(savedInstanceState != null){
+            mRecipeResponses = savedInstanceState.getParcelableArrayList(DATA_RECIPES);
+            savedRecyclerLayoutState = savedInstanceState.getParcelable(BUNDLE_RECYCLER_LAYOUT);
+        }
+
         super.onViewStateRestored(savedInstanceState);
-        Log.d("ADX2098", "OnViewStateRestored");
     }
 
     @Override
