@@ -1,9 +1,11 @@
 package com.adx2099.bakingapp.ui.recipe;
 
 
+import android.content.Context;
 import android.database.Cursor;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -27,6 +29,7 @@ import com.adx2099.bakingapp.models.RecipeResponse;
 import com.adx2099.bakingapp.provider.BakingDbContract;
 import com.adx2099.bakingapp.ui.steps.StepsFragment;
 import com.adx2099.bakingapp.utils.DataUtils;
+import com.google.gson.internal.bind.DateTypeAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,6 +47,7 @@ public class RecipeFragment extends Fragment implements RecipeView, IRecipeItemC
     private FragmentRecipeBinding fragmentRecipeBinding;
     private  List<RecipeResponse> mRecipeResponses = new ArrayList<>();
     private RecipeRecycleAdapter adapter;
+    public static final String DATA_RECIPES = "recipes_key";
     private static final int BAKING_LOADER_ID = 0;
     private int lay;
 
@@ -52,6 +56,36 @@ public class RecipeFragment extends Fragment implements RecipeView, IRecipeItemC
 
     public RecipeFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.d("ADX2098", "OnStop");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d("ADX2098", "OnResume");
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d("ADX2098", "OnStart");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d("ADX2098", "OnDestroy");
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
     }
 
     @Override
@@ -65,7 +99,20 @@ public class RecipeFragment extends Fragment implements RecipeView, IRecipeItemC
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.d("ADX2098", "onCreateView");
         fragmentRecipeBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_recipe, container, false);
+        if(savedInstanceState != null){
+            loadRecipesAdapter();
+        }else{
+            fragmentRecipeBinding.rvRecipes.setLayoutManager(new LinearLayoutManager(getActivity()));
+            fragmentRecipeBinding.rvRecipes.setHasFixedSize(true);
+            fragmentRecipeBinding.rvRecipes.setAdapter(loadRecipesAdapter());
+        }
+        View view = fragmentRecipeBinding.getRoot();
+        return view;
+    }
+
+    private RecipeRecycleAdapter loadRecipesAdapter() {
         LoaderManager loaderManager = App.getCurrentActivity().getSupportLoaderManager();
         Loader<Cursor> cursorLoader = loaderManager.getLoader(BAKING_LOADER_ID);
         if(cursorLoader == null){
@@ -74,18 +121,14 @@ public class RecipeFragment extends Fragment implements RecipeView, IRecipeItemC
             loaderManager.restartLoader(BAKING_LOADER_ID,null,this);
         }
         adapter = new RecipeRecycleAdapter(App.getCurrentActivity(),mRecipeResponses,this);
-        fragmentRecipeBinding.rvRecipes.setLayoutManager(new LinearLayoutManager(getActivity()));
-        fragmentRecipeBinding.rvRecipes.setHasFixedSize(true);
-        fragmentRecipeBinding.rvRecipes.setAdapter(adapter);
-        View view = fragmentRecipeBinding.getRoot();
-        return view;
+        return adapter;
     }
 
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
-
+        Log.d("ADX2098", "OnViewCreated");
     }
 
 
@@ -120,7 +163,6 @@ public class RecipeFragment extends Fragment implements RecipeView, IRecipeItemC
                 }else{
                     forceLoad();
                 }
-
             }
 
             @Nullable
@@ -168,7 +210,22 @@ public class RecipeFragment extends Fragment implements RecipeView, IRecipeItemC
     }
 
 
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle currentState) {
+        if(currentState != null){
+            currentState.putParcelableArrayList(DATA_RECIPES, new ArrayList<Parcelable>());
+        }
+        super.onSaveInstanceState(currentState);
+        Log.d("ADX2098", "OnSaveInstanceState");
 
+
+    }
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        Log.d("ADX2098", "OnViewStateRestored");
+    }
 
     @Override
     public void onLoaderReset(@NonNull Loader<Cursor> loader) {
