@@ -89,7 +89,7 @@ public class RecipeFragment extends Fragment implements RecipeView, IRecipeItemC
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
+        Log.d("ADX2098", "onAttach");
     }
 
     @Override
@@ -99,6 +99,7 @@ public class RecipeFragment extends Fragment implements RecipeView, IRecipeItemC
         lay = bundle.getInt(LAYOUT);
         recipePresenter = new RecipePresenter(this);
         recipePresenter.retrieveRecipesFromDB();
+        Log.d("ADX2098", "onCreate");
     }
 
     @Override
@@ -108,7 +109,7 @@ public class RecipeFragment extends Fragment implements RecipeView, IRecipeItemC
         if(savedInstanceState != null){
            mRecipeResponses = savedInstanceState.getParcelableArrayList(DATA_RECIPES);
            savedRecyclerLayoutState = savedInstanceState.getParcelable(BUNDLE_RECYCLER_LAYOUT);
-            displayData();
+           displayData();
         }else{
             loadRecipesAdapter();
             displayData();
@@ -118,15 +119,26 @@ public class RecipeFragment extends Fragment implements RecipeView, IRecipeItemC
         return view;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
+        Log.d("ADX2098", "OnViewCreated");
+    }
+
+
+
+
     private void displayData(){
         fragmentRecipeBinding.rvRecipes.setLayoutManager(new LinearLayoutManager(getActivity()));
         fragmentRecipeBinding.rvRecipes.setHasFixedSize(true);
         int orientation = getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_LANDSCAPE){
             fragmentRecipeBinding.rvRecipes.setLayoutManager(new GridLayoutManager(App.getCurrentActivity(), 2));
+
         }
         adapter = new RecipeRecycleAdapter(App.getCurrentActivity(),mRecipeResponses,this);
         fragmentRecipeBinding.rvRecipes.setAdapter(adapter);
+        adapter.swapData();
     }
 
     private void loadRecipesAdapter() {
@@ -141,11 +153,7 @@ public class RecipeFragment extends Fragment implements RecipeView, IRecipeItemC
     }
 
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
-        Log.d("ADX2098", "OnViewCreated");
-    }
 
 
     @Override

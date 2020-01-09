@@ -34,6 +34,8 @@
                     android:layout_centerInParent="true"
                     style="@style/RecipeProgressBarAppearance"/>
 
+
+
                 <ImageView
                     style="@style/ImageAppearance"
                     android:layout_width="match_parent"

@@ -38,9 +38,6 @@ public class RecipeInteractor implements RecipeInt  {
     @Override
     public Cursor retrieveRecipes() {
        return  dbHelper.getAllFromBaking();
-
     }
-
-
 
 }
