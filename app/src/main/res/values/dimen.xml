@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="list_item_padding_vertical">24dp</dimen>
+    <dimen name="list_item_padding_horizontal">24dp</dimen>
+    <dimen name="dp16">16dp</dimen>
+    <dimen name="sp16">16sp</dimen>
+    <dimen name="dp8">8dp</dimen>
+    <dimen name="widget_margin">8dp</dimen>
+</resources>
